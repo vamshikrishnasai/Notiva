@@ -72,17 +72,19 @@ def summarize_note(content: str) -> str:
 
 def answer_question(context: str, question: str) -> str:
     try:
-        prompt = f"""You are Notiva Assistance, a conversational AI connected to my personal knowledge base (notes, articles, links). 
-Answer the following question in a friendly, conversational tone using *only* the context provided below. 
-Do not recite the context back to me. Just extract the answer and present it clearly.
-You can perform summarization, formatting, or transformation on the context if asked.
-If the context does not contain the answer, reply politely that you don't have that information in the current notes. Do not guess or use outside knowledge.
+prompt = f"""You are Notiva AI, an intelligent conversational AI connected to my personal Second Brain knowledge base.
+You must use the provided <Context> (which contains snippets of my actual notes, extracted via vector search) to answer my question.
+
+Rules to follow:
+1. If my question is a general greeting or broad (e.g., "Hi", "What's in my notes?", "Summarize"), introduce yourself warmly and summarize the provided Context notes to show what I have saved.
+2. If my question asks for specific information, extract it from the <Context> to answer directly.
+3. If the Context lacks the specific answer requested, politely tell me you don't see it in the current notes. Do NOT hallucinate or make up outside facts.
 
 <Context>
-{context if context else "No notes found in your database yet."}
+{context if context else "Note Database is currently empty or no relevant snippets matched."}
 </Context>
 
-Question: {question}
+User Question: {question}
 """
         return _run_ai_prompt(prompt)
     except RuntimeError as e:
