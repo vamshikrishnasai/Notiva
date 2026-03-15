@@ -30,9 +30,9 @@ With Notiva, you can seamlessly organize notes, capture research, attach files, 
 
 ### Backend (`/Backend`)
 - **Framework:** FastAPI (Python 3.11+)
-- **Database:** SQLite (SQLAlchemy ORM)
+- **Database:** PostgreSQL (via SQLAlchemy ORM & psycopg2)
 - **Vector Database:** ChromaDB (for intelligent RAG retrieval)
-- **AI Engine:** Google Gemini API (`gemini-2.5-flash`)
+- **AI Engine:** Google Gemini API (`gemini-2.5-flash`) + Mistral Fallback
 - **Utilities:** BeautifulSoup4 (Web Scraping), PyPDF2, python-docx
 
 ---
@@ -58,11 +58,22 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Create a `.env` file in the `Backend` directory and add your API keys:
+Create a `.env` file in the `Backend` directory and add your API keys and Database URL:
 ```env
 GEMINI_API_KEY=your_google_gemini_api_key_here
 MISTRAL_API_KEY=your_mistral_api_key_here
+DATABASE_URL=postgresql://user:password@localhost:5432/notivadb
 ```
+
+### 3. Docker, PostgreSQL & ChromaDB Setup
+For production or robust local development, Notiva uses **PostgreSQL** for relational data (users/notes metadata) and **ChromaDB** for vector embeddings.
+
+You can easily spin up the required PostgreSQL database using the provided `docker-compose.yml` file:
+```bash
+# In the Backend directory
+docker-compose up -d
+```
+*Note: ChromaDB can run entirely in-memory or persist locally as a file out-of-the-box via the Python client, but you can also route it through a dedicated Docker container if your infrastructure requires standalone vector scaling.*
 
 Start the FastAPI server:
 ```bash
@@ -71,7 +82,7 @@ uvicorn app.main:app --reload
 *The backend will be running at `http://127.0.0.1:8000`*
 *You can view the custom beautiful API Documentation at `http://127.0.0.1:8000/docs`*
 
-### 3. Frontend Setup
+### 4. Frontend Setup
 Open a new terminal, navigate to the `my-app` directory, and install dependencies:
 ```bash
 cd my-app
