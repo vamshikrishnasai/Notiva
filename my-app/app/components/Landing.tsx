@@ -1,6 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Sparkles, BookOpen, BrainCircuit, Zap, Shield, Globe, ChevronRight, Star, ArrowRight } from 'lucide-react';
+import { Sparkles, BookOpen, BrainCircuit, Zap, Shield, Globe, ChevronRight, Star, ArrowRight, Network } from 'lucide-react';
 
 interface LandingProps {
   onLogin: () => void;
@@ -15,14 +15,10 @@ const features = [
   { icon: <Zap size={22} />, color: '#f59e0b', title: 'AI Enhancements', desc: 'One-click bullet points, logical flow diagrams, auto-tagging, and translation powered by Gemini AI.' },
   { icon: <Globe size={22} />, color: '#06b6d4', title: 'Web & File Import', desc: 'Scrape articles from URLs or upload PDFs, DOCX, and PPTX files. Notiva extracts and indexes the content automatically.' },
   { icon: <Shield size={22} />, color: '#8b5cf6', title: 'Private & Secure', desc: 'Your data stays on your infrastructure. Nothing leaves your servers. Full privacy by design.' },
+  { icon: <Network size={22} />, color: '#ec4899', title: 'Knowledge Graph', desc: 'Interactive topological graphs and line charts that visually map the semantic relationships and connections between your notes.' },
   { icon: <Star size={22} />, color: '#ec4899', title: 'Voice & Read Aloud', desc: 'Dictate notes with voice input or have Notiva read them back to you with multi-language TTS support.' },
 ];
 
-const testimonials = [
-  { name: 'Priya S.', role: 'Research Scholar', text: 'Notiva transformed how I manage my research papers. The AI summaries save me hours every week.' },
-  { name: 'Arjun M.', role: 'Product Manager', text: 'The notebook hierarchy and AI chat feel like having a second brain. I can find anything instantly.' },
-  { name: 'Divya K.', role: 'Content Creator', text: 'Translation and voice dictation make Notiva perfect for my multilingual content workflow.' },
-];
 
 export default function Landing({ onLogin, onSignup, isDark, toggleDark }: LandingProps) {
   return (
@@ -30,7 +26,7 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
       {/* Nav */}
       <nav className="landing-nav">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/notiva_logo.png" alt="Notiva Logo" width={32} height={32} style={{ borderRadius: 9, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
+          <img src="/notiva_logo.png" alt="Notiva Logo" width={48} height={48} style={{ borderRadius: 10, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <button className="theme-toggle" onClick={toggleDark} title="Toggle dark mode">
@@ -46,6 +42,9 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
         <div className="hero-blob-1" />
         <div className="hero-blob-2" />
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
+          <div style={{ marginBottom: 20 }}>
+            <img src="/notiva_logo.png" alt="Notiva Logo Element" width={72} height={72} style={{ borderRadius: 16, boxShadow: '0 8px 24px rgba(99,102,241,0.4)', margin: '0 auto' }} />
+          </div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--accent-muted)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-full)', padding: '6px 16px', marginBottom: 28, fontSize: '0.8rem', color: 'var(--accent)', fontWeight: 600 }}>
             <Sparkles size={13} /> AI-Powered Second Brain
           </div>
@@ -137,30 +136,6 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section style={{ padding: '60px 40px 80px', background: 'var(--bg-surface)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
-          <h2 style={{ fontSize: '1.8rem', fontWeight: 800, fontFamily: 'var(--font-brand)', textAlign: 'center', marginBottom: 44, color: 'var(--text-primary)' }}>
-            Loved by knowledge workers
-          </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-            {testimonials.map((t, i) => (
-              <motion.div key={t.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}
-                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-xl)', padding: '24px', boxShadow: 'var(--shadow-sm)' }}>
-                <div style={{ display: 'flex', gap: 2, marginBottom: 14 }}>
-                  {[1,2,3,4,5].map(s => <Star key={s} size={13} fill="#f59e0b" color="#f59e0b" />)}
-                </div>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 18 }}>"{t.text}"</p>
-                <div>
-                  <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-primary)' }}>{t.name}</div>
-                  <div style={{ fontSize: '0.775rem', color: 'var(--text-muted)' }}>{t.role}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section style={{ padding: '80px 40px', textAlign: 'center' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
@@ -180,7 +155,7 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
       <footer style={{ borderTop: '1px solid var(--border)', padding: '24px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div className="brand-name" style={{ fontSize: '1rem' }}>Notiva</div>
-          <span>— © 2025 All rights reserved</span>
+          <span>— © 2026 All rights reserved</span>
         </div>
         <span>Built with ♥ for knowledge workers</span>
       </footer>

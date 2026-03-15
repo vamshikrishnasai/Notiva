@@ -44,7 +44,7 @@ export default function Auth({ mode, onSuccess, onSwitch, onBack }: AuthProps) {
           </button>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 32 }}>
-            <img src="/notiva_logo.png" alt="Notiva Logo" width={36} height={36} style={{ borderRadius: 10, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
+            <img src="/notiva_logo.png" alt="Notiva Logo" width={48} height={48} style={{ borderRadius: 10, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
           </div>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>

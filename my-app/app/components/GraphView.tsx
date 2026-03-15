@@ -2,15 +2,18 @@
 import React, { useMemo } from 'react';
 import { ReactFlow, Controls, Background, Node, Edge } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import { Menu } from 'lucide-react';
 import { KnowledgeItem } from './types';
 
 interface GraphViewProps {
   items: KnowledgeItem[];
   onNodeClick: (id: number) => void;
   isDark: boolean;
+  sidebarOpen: boolean;
+  setSidebarOpen: (v: boolean) => void;
 }
 
-export default function GraphView({ items, onNodeClick, isDark }: GraphViewProps) {
+export default function GraphView({ items, onNodeClick, isDark, sidebarOpen, setSidebarOpen }: GraphViewProps) {
 
   const { nodes, edges } = useMemo(() => {
     const nds: Node[] = [];
@@ -131,12 +134,19 @@ export default function GraphView({ items, onNodeClick, isDark }: GraphViewProps
   }, [items, isDark]);
 
   return (
-    <div style={{ width: '100%', height: '100vh', background: isDark ? 'var(--bg-base)' : 'var(--bg-base)' }}>
-      <div style={{ position: 'absolute', top: 20, left: 80, zIndex: 10 }}>
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 800, fontFamily: 'var(--font-brand)', color: 'var(--text-primary)' }}>
-          Knowledge Graph 🧠
-        </h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Map of your Second Brain connections.</p>
+    <div style={{ position: 'relative', width: '100%', height: '100vh', background: isDark ? 'var(--bg-base)' : 'var(--bg-base)' }}>
+      <div style={{ position: 'absolute', top: 20, left: sidebarOpen ? 30 : 60, zIndex: 10, display: 'flex', gap: 16 }}>
+        {!sidebarOpen && (
+          <button onClick={() => setSidebarOpen(true)} className="glass-btn icon-only" style={{ padding: 8, marginTop: 4 }}>
+            <Menu size={18} />
+          </button>
+        )}
+        <div>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 800, fontFamily: 'var(--font-brand)', color: 'var(--text-primary)' }}>
+            Knowledge Graph 🧠
+          </h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Map of your Second Brain connections.</p>
+        </div>
       </div>
       <ReactFlow
         nodes={nodes}

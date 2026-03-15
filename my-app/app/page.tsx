@@ -429,6 +429,8 @@ export default function NotivaApp() {
         <GraphView 
           items={items} 
           isDark={!!isDarkMode}
+          sidebarOpen={!!sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
           onNodeClick={(id) => {
             const item = items.find(i => i.id === id);
             if (item) {
