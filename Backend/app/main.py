@@ -3,11 +3,30 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes import notes, query
 from app.db.database import Base, engine
 from app.db import models  # noqa: F401
+from contextlib import asynccontextmanager
 
 # Create tables for local development if they do not exist yet.
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Notiva API", docs_url="/api-docs", redoc_url="/redoc")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Auto-Sync SQL Notes to ChromaDB Vector Store on boot 
+    # (Fixes Render ephemeral disk wipe issues causing RAG to fail)
+    try:
+        from app.db.database import SessionLocal
+        from app.db.models import Note
+        from app.services.embedding_service import sync_all_embeddings
+        
+        db = SessionLocal()
+        all_notes = db.query(Note).all()
+        sync_all_embeddings(all_notes)
+        db.close()
+        print(f"Successfully synchronized {len(all_notes)} notes to ChromaDB.")
+    except Exception as e:
+        print(f"Failed to sync ChromaDB: {e}")
+    yield
+
+app = FastAPI(title="Notiva API", docs_url="/api-docs", redoc_url="/redoc", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
