@@ -26,7 +26,7 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
       {/* Nav */}
       <nav className="landing-nav">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/notiva_logo.png" alt="Notiva Logo" width={48} height={48} style={{ borderRadius: 10, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
+          <img src="/notiva_logo.png" alt="Notiva Logo" width={108} height={108} style={{ borderRadius: 10 }} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <button className="theme-toggle" onClick={toggleDark} title="Toggle dark mode">
@@ -42,9 +42,7 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
         <div className="hero-blob-1" />
         <div className="hero-blob-2" />
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-          <div style={{ marginBottom: 20 }}>
-            <img src="/notiva_logo.png" alt="Notiva Logo Element" width={72} height={72} style={{ borderRadius: 16, boxShadow: '0 8px 24px rgba(99,102,241,0.4)', margin: '0 auto' }} />
-          </div>
+         
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--accent-muted)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-full)', padding: '6px 16px', marginBottom: 28, fontSize: '0.8rem', color: 'var(--accent)', fontWeight: 600 }}>
             <Sparkles size={13} /> AI-Powered Second Brain
           </div>
@@ -157,7 +155,7 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
           <div className="brand-name" style={{ fontSize: '1rem' }}>Notiva</div>
           <span>— © 2026 All rights reserved</span>
         </div>
-        <span>Built with ♥ for knowledge workers</span>
+        <span>Built with ♥ for knowledge workers By Vamshi</span>
       </footer>
     </div>
   );

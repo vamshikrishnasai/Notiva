@@ -151,14 +151,18 @@ export default function NotivaApp() {
   // ─────────────────────────────────────────────────────────
   // CRUD
   // ─────────────────────────────────────────────────────────
-  const handleCreateNew = useCallback(async (nbOverride?: string, secOverride?: string) => {
+  const handleCreateNew = useCallback(async (nbOverride?: string | any, secOverride?: string | any) => {
     setSelectedId(null);
     const typeForView: Record<string, ItemType> = { notes: 'note', articles: 'article', links: 'link', research: 'research' };
+    
+    const validNb = typeof nbOverride === 'string' ? nbOverride : activeNotebook;
+    const validSec = typeof secOverride === 'string' ? secOverride : '';
+
     const nf = { 
       ...defaultForm, 
       type: typeForView[activeView] ?? 'note', 
-      notebook: nbOverride || activeNotebook, 
-      tags: secOverride || '' 
+      notebook: validNb, 
+      tags: validSec 
     };
     setFormData(nf);
 

@@ -70,8 +70,8 @@ export default function Sidebar({
         >
           {/* Logo Row */}
           <div className="sidebar-logo">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <img src="/notiva_logo.png" alt="Notiva Logo" width={32} height={32} style={{ borderRadius: 8 }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginLeft:40,marginTop:10,marginBottom:25 }}>
+              <img src="/notiva_logo.png" alt="Notiva Logo" width={102} height={102} style={{ borderRadius: 8 }} />
             </div>
             <button
               onClick={() => setSidebarOpen(false)}

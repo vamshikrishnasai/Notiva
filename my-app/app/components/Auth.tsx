@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, ArrowLeft, Sparkles, BrainCircuit, BookOpen, Zap } from 'lucide-react';
-
+import Image from 'next/image';
 interface AuthProps {
   mode: 'login' | 'signup';
   onSuccess: (user: { name: string; email: string }) => void;
@@ -44,7 +44,7 @@ export default function Auth({ mode, onSuccess, onSwitch, onBack }: AuthProps) {
           </button>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 32 }}>
-            <img src="/notiva_logo.png" alt="Notiva Logo" width={48} height={48} style={{ borderRadius: 10, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
+            <img src="/notiva_logo.png" alt="Notiva Logo" width={108} height={108} style={{ borderRadius: 10 }} />
           </div>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
@@ -136,8 +136,14 @@ export default function Auth({ mode, onSuccess, onSwitch, onBack }: AuthProps) {
           transition={{ duration: 0.6, delay: 0.1 }}
           style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}
         >
-          <div style={{ width: 56, height: 56, background: 'rgba(255,255,255,0.2)', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', backdropFilter: 'blur(10px)' }}>
-            <Sparkles size={26} color="#fff" />
+          <div style={{ width: 56, height: 56,  borderRadius: 16, }}>
+<Image 
+  src="/notiva_logo.png" 
+  alt="Notiva Logo" 
+  width={108} 
+  height={108} 
+  style={{ borderRadius: 10 }} 
+/>
           </div>
           <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-brand)', letterSpacing: '-0.02em', marginBottom: 16, lineHeight: 1.2 }}>
             Your Knowledge,<br />Magnified by AI
