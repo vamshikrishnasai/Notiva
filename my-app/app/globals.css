@@ -237,6 +237,13 @@ body {
   transform: translateY(-3px);
 }
 
+/* Landing page scroll fix */
+.landing-page {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 /* Landing nav */
 .landing-nav {
   position: sticky;

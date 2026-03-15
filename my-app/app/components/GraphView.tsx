@@ -132,7 +132,7 @@ export default function GraphView({ items, onNodeClick, isDark }: GraphViewProps
 
   return (
     <div style={{ width: '100%', height: '100vh', background: isDark ? 'var(--bg-base)' : 'var(--bg-base)' }}>
-      <div style={{ position: 'absolute', top: 20, left: 30, zIndex: 10 }}>
+      <div style={{ position: 'absolute', top: 20, left: 80, zIndex: 10 }}>
         <h2 style={{ fontSize: '1.4rem', fontWeight: 800, fontFamily: 'var(--font-brand)', color: 'var(--text-primary)' }}>
           Knowledge Graph 🧠
         </h2>

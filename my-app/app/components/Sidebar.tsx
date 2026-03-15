@@ -72,10 +72,6 @@ export default function Sidebar({
           <div className="sidebar-logo">
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <img src="/notiva_logo.png" alt="Notiva Logo" width={32} height={32} style={{ borderRadius: 8 }} />
-              <div>
-                <div className="logo-text">Notiva</div>
-                <div className="logo-tagline">SECOND BRAIN</div>
-              </div>
             </div>
             <button
               onClick={() => setSidebarOpen(false)}

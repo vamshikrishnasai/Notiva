@@ -31,7 +31,6 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
       <nav className="landing-nav">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <img src="/notiva_logo.png" alt="Notiva Logo" width={32} height={32} style={{ borderRadius: 9, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
-          <span className="brand-name" style={{ fontSize: '1.2rem' }}>Notiva</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <button className="theme-toggle" onClick={toggleDark} title="Toggle dark mode">

@@ -98,7 +98,7 @@ User Question: {question}
 
 def bullet_points(content: str) -> str:
     try:
-        prompt = f"Summarize the following text into concise key bullet points:\n\n{content}"
+        prompt = f"Summarize the following text into concise key bullet points. IMPORTANT: You must use the dash character '-' for each bullet point. Do not use hashes ('#') for bullet points:\n\n{content}"
         return _run_ai_prompt(prompt)
     except Exception as e:
         return f"Error generating bullet points: {str(e)}"
