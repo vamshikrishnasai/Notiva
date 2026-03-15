@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, BookOpen, BrainCircuit, Zap, Shield, Globe, ChevronRight, Star, ArrowRight, Network } from 'lucide-react';
+import { HeroGeometric } from '@/components/ui/shape-landing-hero';
 
 interface LandingProps {
   onLogin: () => void;
@@ -23,7 +24,8 @@ const taglines = [
   "Your Second Brain.",
   "Magnified by AI.",
   "Organize your knowledge.",
-  "Summarize everything."
+  "Summarize everything.",
+  "Talk to your notes."
 ];
 
 function TypewriterText() {
@@ -53,7 +55,7 @@ function TypewriterText() {
   }, [text, isDeleting, loopNum, typingSpeed]);
 
   return (
-    <span className="gradient-text" style={{ position: 'relative' }}>
+    <span className="gradient-text flex items-center justify-center translate-x-1" style={{ position: 'relative', textAlign: 'center', fontSize: '0.55em', whiteSpace: 'nowrap' ,marginBottom: '80px', marginTop: '40px'}}>
       {text}
       <motion.span
         animate={{ opacity: [1, 0] }}
@@ -68,88 +70,74 @@ function TypewriterText() {
 
 export default function Landing({ onLogin, onSignup, isDark, toggleDark }: LandingProps) {
   return (
-    <div className="landing-page">
-      {/* Nav */}
-      <nav className="landing-nav">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="/notiva_logo.png" alt="Notiva Logo" width={108} height={108} style={{ borderRadius: 10 }} />
+    <div className="landing-page dark-mode ">
+      <HeroGeometric
+      badge={
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '4px 8px' }}>
+          <Sparkles size={16} style={{ color: '#a78bfa', filter: 'drop-shadow(0 0 8px #a78bfa)' }} /> 
+          <span style={{ fontSize: '15px', fontWeight: 700, letterSpacing: '0.03em', color: '#fff', textShadow: '0 0 12px rgba(167, 139, 250, 0.8)'}}>AI-Powered Second Brain</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <button className="theme-toggle" onClick={toggleDark} title="Toggle dark mode">
-            <span className="theme-toggle-thumb" />
-          </button>
-          <button className="btn-outline" onClick={onLogin} style={{ padding: '8px 18px', fontSize: '0.875rem' }}>Log in</button>
-          <button className="btn-cta" onClick={onSignup} style={{ padding: '8px 18px', fontSize: '0.875rem' }}>Get Started <ArrowRight size={14} /></button>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <section style={{ position: 'relative', padding: '100px 40px 80px', overflow: 'hidden', textAlign: 'center' }}>
-        <div className="hero-blob-1" />
-        <div className="hero-blob-2" />
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-         
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--accent-muted)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-full)', padding: '6px 16px', marginBottom: 28, fontSize: '0.8rem', color: 'var(--accent)', fontWeight: 600 }}>
-            <Sparkles size={13} /> AI-Powered Second Brain
+      }
+      title1="Notiva"
+      title2={<TypewriterText />}
+      
+      description="Notiva combines a beautiful note editor with RAG-powered AI, letting you chat with your knowledge base, translate in 50+ languages, and extract insights from any document."
+      nav={
+        <nav className="landing-nav relative z-50" style={{ background: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'none' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <img src="/notiva_logo.png" alt="Notiva Logo" width={108} height={108} style={{ borderRadius: 10 }} />
           </div>
-          <h1 style={{ fontSize: 'clamp(2.6rem, 5vw, 4rem)', fontWeight: 800, fontFamily: 'var(--font-brand)', letterSpacing: '-0.03em', lineHeight: 1.25, marginBottom: 24, color: 'var(--text-primary)', height: 'clamp(5.2rem, 10vw, 8rem)', display: 'block' }}>
-            Notiva:<br />
-            <TypewriterText />
-          </h1>
-          <p style={{ fontSize: '1.125rem', color: 'var(--text-secondary)', maxWidth: 560, margin: '0 auto 40px', lineHeight: 1.72 }}>
-            Notiva combines a beautiful note editor with RAG-powered AI, letting you chat with your knowledge base, translate in 50+ languages, and extract insights from any document.
-          </p>
-          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <button className="btn-outline" onClick={onLogin} style={{ padding: '8px 18px', fontSize: '0.875rem', borderColor: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.8)' }}>Log in</button>
+            <button className="btn-cta" onClick={onSignup} style={{ padding: '8px 18px', fontSize: '0.875rem', boxShadow: '0 0 15px rgba(99,102,241,0.5)' }}>Get Started <ArrowRight size={14} /></button>
+          </div>
+        </nav>
+      }
+      actionButtons={
+        <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', marginBottom: '32px',marginTop: '80px' }}>
             <button className="btn-cta" onClick={onSignup} style={{ padding: '14px 32px', fontSize: '1rem' }}>
               Start for Free <ArrowRight size={16} />
             </button>
             <button className="btn-outline" onClick={onLogin} style={{ padding: '14px 28px', fontSize: '1rem' }}>
               Sign In
             </button>
+        </div>
+      }
+      appPreview={
+        <div style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-2xl)', boxShadow: 'var(--shadow-xl)', padding: '20px 24px', textAlign: 'left', maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+          <div style={{ display: 'flex', gap: 6, marginBottom: 14 }}>
+            {['#ff5f57','#febc2e','#28c840'].map(c => (
+              <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c }} />
+            ))}
           </div>
-        </motion.div>
-
-        {/* App Preview */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          style={{ marginTop: 64, maxWidth: 900, margin: '64px auto 0', position: 'relative' }}
-        >
-          <div style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-2xl)', boxShadow: 'var(--shadow-xl)', padding: '20px 24px', textAlign: 'left' }}>
-            <div style={{ display: 'flex', gap: 6, marginBottom: 14 }}>
-              {['#ff5f57','#febc2e','#28c840'].map(c => (
-                <div key={c} style={{ width: 12, height: 12, borderRadius: '50%', background: c }} />
+          <div style={{ display: 'flex', gap: 16, height: 320 }}>
+            <div style={{ width: 200, background: 'var(--bg-surface)', borderRadius: 'var(--radius-lg)', padding: 14, flexShrink: 0 }}>
+              <div style={{ height: 10, background: 'var(--bg-hover)', borderRadius: 4, width: '60%', marginBottom: 16 }} />
+              {[80, 65, 75, 55, 70].map((w, i) => (
+                <div key={i} style={{ height: 8, background: i === 0 ? 'var(--accent-muted)' : 'var(--bg-hover)', borderRadius: 4, width: `${w}%`, marginBottom: 10 }} />
               ))}
             </div>
-            <div style={{ display: 'flex', gap: 16, height: 320 }}>
-              <div style={{ width: 200, background: 'var(--bg-surface)', borderRadius: 'var(--radius-lg)', padding: 14, flexShrink: 0 }}>
-                <div style={{ height: 10, background: 'var(--bg-hover)', borderRadius: 4, width: '60%', marginBottom: 16 }} />
-                {[80, 65, 75, 55, 70].map((w, i) => (
-                  <div key={i} style={{ height: 8, background: i === 0 ? 'var(--accent-muted)' : 'var(--bg-hover)', borderRadius: 4, width: `${w}%`, marginBottom: 10 }} />
-                ))}
-              </div>
-              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <div style={{ height: 22, background: 'var(--bg-surface)', borderRadius: 4, width: '50%' }} />
-                {[100, 85, 92, 78, 88, 60, 95].map((w, i) => (
-                  <div key={i} style={{ height: 9, background: 'var(--bg-hover)', borderRadius: 4, width: `${w}%` }} />
-                ))}
-              </div>
-              <div style={{ width: 200, background: 'linear-gradient(135deg, var(--accent-muted), rgba(139,92,246,0.08))', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-lg)', padding: 14, flexShrink: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-                  <div style={{ width: 20, height: 20, borderRadius: 6, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <BrainCircuit size={11} color="#fff" />
-                  </div>
-                  <div style={{ height: 8, background: 'var(--accent-border)', borderRadius: 4, width: '60%' }} />
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ height: 22, background: 'var(--bg-surface)', borderRadius: 4, width: '50%' }} />
+              {[100, 85, 92, 78, 88, 60, 95].map((w, i) => (
+                <div key={i} style={{ height: 9, background: 'var(--bg-hover)', borderRadius: 4, width: `${w}%` }} />
+              ))}
+            </div>
+            <div style={{ width: 200, background: 'linear-gradient(135deg, var(--accent-muted), rgba(139,92,246,0.08))', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-lg)', padding: 14, flexShrink: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                <div style={{ width: 20, height: 20, borderRadius: 6, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <BrainCircuit size={11} color="#fff" />
                 </div>
-                {[100, 80, 90, 70].map((w, i) => (
-                  <div key={i} style={{ height: 7, background: 'var(--accent-border)', borderRadius: 4, width: `${w}%`, marginBottom: 8 }} />
-                ))}
+                <div style={{ height: 8, background: 'var(--accent-border)', borderRadius: 4, width: '60%' }} />
               </div>
+              {[100, 80, 90, 70].map((w, i) => (
+                <div key={i} style={{ height: 7, background: 'var(--accent-border)', borderRadius: 4, width: `${w}%`, marginBottom: 8 }} />
+              ))}
             </div>
           </div>
-        </motion.div>
-      </section>
+        </div>
+      }
+    >
 
       {/* Features */}
       <section style={{ padding: '80px 40px', maxWidth: 1100, margin: '0 auto' }}>
@@ -196,13 +184,14 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
       </section>
 
       {/* Footer */}
-      <footer style={{ borderTop: '1px solid var(--border)', padding: '24px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-muted)', fontSize: '0.8rem' }}>
+      <footer style={{ borderTop: '1px solid var(--border)', padding: '24px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-muted)', fontSize: '0.8rem', position: 'relative', zIndex: 10 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div className="brand-name" style={{ fontSize: '1rem' }}>Notiva</div>
           <span>— © 2026 All rights reserved</span>
         </div>
         <span>Built with ♥ for knowledge workers By Vamshi</span>
       </footer>
+    </HeroGeometric>
     </div>
   );
 }
