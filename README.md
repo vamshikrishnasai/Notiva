@@ -11,6 +11,7 @@ With Notiva, you can seamlessly organize notes, capture research, attach files, 
 
 - **Intelligent Notebook Hierarchy**: Organize effortlessly with an intuitive nested structure (Notebook → Section → Page).
 - **RAG AI Chat Panel**: A floating chat assistant that answers direct questions securely based **only** on the context of the notes you have written (Powered by Google Gemini + ChromaDB Vector Search).
+- **Graph Visualization**: Interactive topological graphs and line charts that visually map the semantic relationships, tags, and connections between your disparate notes.
 - **Smart Editor AI Actions**: Instantly summarize notes into key bullet points, rewrite blocks for logical flow, or auto-generate categorization #tags with one click.
 - **Multilingual Support**: Real-time translation into 50+ languages directly inside the editor.
 - **File Upload & URL Web Scraping**: Ingest rich data. Drop a URL to scrape its readable text, or upload `.pdf`, `.docx`, `.txt`, and `.csv` files straight into your editor.
