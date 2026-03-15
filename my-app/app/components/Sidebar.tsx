@@ -71,9 +71,7 @@ export default function Sidebar({
           {/* Logo Row */}
           <div className="sidebar-logo">
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div className="logo-mark">
-                <span style={{ color: '#fff', fontWeight: 800, fontSize: '1rem', fontFamily: 'var(--font-brand)' }}>N</span>
-              </div>
+              <img src="/notiva_logo.png" alt="Notiva Logo" width={32} height={32} style={{ borderRadius: 8 }} />
               <div>
                 <div className="logo-text">Notiva</div>
                 <div className="logo-tagline">SECOND BRAIN</div>

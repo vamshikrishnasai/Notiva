@@ -44,9 +44,7 @@ export default function Auth({ mode, onSuccess, onSwitch, onBack }: AuthProps) {
           </button>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 32 }}>
-            <div style={{ width: 36, height: 36, background: 'var(--brand-gradient)', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }}>
-              <span style={{ color: '#fff', fontWeight: 800, fontFamily: 'var(--font-brand)', fontSize: '1.1rem' }}>N</span>
-            </div>
+            <img src="/notiva_logo.png" alt="Notiva Logo" width={36} height={36} style={{ borderRadius: 10, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
             <span className="brand-name" style={{ fontSize: '1.25rem' }}>Notiva</span>
           </div>
 

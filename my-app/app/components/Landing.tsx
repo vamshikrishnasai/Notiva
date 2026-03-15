@@ -30,9 +30,7 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
       {/* Nav */}
       <nav className="landing-nav">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ width: 32, height: 32, background: 'var(--brand-gradient)', borderRadius: 9, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }}>
-            <span style={{ color: '#fff', fontWeight: 800, fontSize: '1rem', fontFamily: 'var(--font-brand)' }}>N</span>
-          </div>
+          <img src="/notiva_logo.png" alt="Notiva Logo" width={32} height={32} style={{ borderRadius: 9, boxShadow: '0 4px 12px rgba(99,102,241,0.35)' }} />
           <span className="brand-name" style={{ fontSize: '1.2rem' }}>Notiva</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
