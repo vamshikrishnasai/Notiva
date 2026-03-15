@@ -38,6 +38,8 @@ app.add_middleware(
 
 app.include_router(notes.router, prefix="/notes", tags=["Notes"])
 app.include_router(query.router, prefix="/query", tags=["Query"])
+from app.routes import auth
+app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 
 from fastapi.responses import PlainTextResponse, HTMLResponse
 from app.docs_html import HTML_CONTENT

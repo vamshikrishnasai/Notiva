@@ -19,7 +19,7 @@ import type { KnowledgeItem, ChatMessage, FormData, SortBy, SidebarView, UserDat
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
 
-type AppView = 'landing' | 'login' | 'signup' | 'app';
+type AppView = 'landing' | 'login' | 'signup' | 'app' | 'forgot';
 
 const defaultForm: FormData = {
   title: '', content: '', type: 'note', tags: '',
@@ -414,8 +414,8 @@ export default function NotivaApp() {
   }
 
   // Auth
-  if (appView === 'login' || appView === 'signup') {
-    return <Auth mode={appView} onSuccess={handleAuthSuccess} onSwitch={() => setAppView(appView === 'login' ? 'signup' : 'login')} onBack={() => setAppView('landing')} />;
+  if (appView === 'login' || appView === 'signup' || appView === 'forgot') {
+    return <Auth mode={appView} onSuccess={handleAuthSuccess} onSwitch={() => setAppView(appView === 'login' ? 'signup' : 'login')} onBack={() => setAppView('landing')} onForgot={() => setAppView('forgot')} />;
   }
 
   // Main App
