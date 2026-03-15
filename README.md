@@ -1,4 +1,4 @@
-# Notiva 2.0 ✨
+# Notiva ✨
 **Your AI-Powered Second Brain**
 
 Notiva is a modern, premium SaaS productivity platform and knowledge management tool designed to act as your intelligent "Second Brain". It combines a beautiful, Notion-like user interface with a powerful Retrieval-Augmented Generation (RAG) AI backend. 
