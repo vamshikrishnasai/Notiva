@@ -77,6 +77,7 @@ export default function Sidebar({
               onClick={() => setSidebarOpen(false)}
               className="glass-btn icon-only"
               title="Collapse sidebar"
+              aria-label="Collapse sidebar"
             >
               <Menu size={14} />
             </button>
@@ -114,7 +115,7 @@ export default function Sidebar({
             {/* Notebooks */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 10px', marginTop: 20, marginBottom: 6 }}>
               <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Notebooks</span>
-              <button onClick={onNewNotebook} className="glass-btn icon-only" style={{ padding: 3, color: 'var(--text-muted)' }} title="New Notebook">
+              <button onClick={onNewNotebook} className="glass-btn icon-only" style={{ padding: 3, color: 'var(--text-muted)' }} title="New Notebook" aria-label="New Notebook">
                 <Plus size={13} />
               </button>
             </div>
@@ -162,6 +163,7 @@ export default function Sidebar({
                       }}
                       style={{ position: 'absolute', right: nb !== 'My Notebook' ? 32 : 8, top: '50%', transform: 'translateY(-50%)', background: 'var(--bg-hover)', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', borderRadius: 'var(--radius-sm)', padding: '4px', opacity: 0, transition: 'opacity 0.2s', display: 'flex' }}
                       title={`New Section in ${nb}`}
+                      aria-label={`New Section in ${nb}`}
                     >
                       <Plus size={11} />
                     </button>
@@ -171,6 +173,7 @@ export default function Sidebar({
                         onClick={e => onDeleteNotebook(nb, e)}
                         style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', background: 'var(--bg-hover)', border: 'none', color: 'var(--red)', cursor: 'pointer', borderRadius: 'var(--radius-sm)', padding: '4px', opacity: 0, transition: 'opacity 0.2s', display: 'flex' }}
                         title={`Delete ${nb}`}
+                        aria-label={`Delete ${nb}`}
                       >
                         <Trash2 size={11} />
                       </button>
@@ -196,7 +199,7 @@ export default function Sidebar({
                                   onMouseLeave={e => { const btn = e.currentTarget.lastElementChild as HTMLElement; if (btn) btn.style.opacity = '0'; }}
                                 >
                                   <span>§ {sec}</span>
-                                  <button onClick={() => onNewNote(nb, sec === 'General' ? '' : sec)} className="glass-btn icon-only" style={{ padding: 2, opacity: 0, transition: 'opacity 0.15s' }} title="New page"><Plus size={11} /></button>
+                                  <button onClick={() => onNewNote(nb, sec === 'General' ? '' : sec)} className="glass-btn icon-only" style={{ padding: 2, opacity: 0, transition: 'opacity 0.15s' }} title="New page" aria-label="New page in section"><Plus size={11} /></button>
                                 </div>
                                 <div style={{ borderLeft: '1px solid var(--border)', marginLeft: 8, paddingLeft: 6, display: 'flex', flexDirection: 'column', gap: 1 }}>
                                   {secItems.map(item => (

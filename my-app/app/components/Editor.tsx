@@ -92,17 +92,17 @@ export default function Editor({
         {/* Left controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
           {(!sidebarOpen || !listOpen) && (
-            <button className="glass-btn" onClick={toggleSidebar} style={{ gap: 5 }}>
+            <button className="glass-btn" aria-label="Open Panels" onClick={toggleSidebar} style={{ gap: 5 }}>
               <Menu size={14} /> Panels
             </button>
           )}
           {sidebarOpen && listOpen && (
-            <button className="glass-btn" onClick={toggleFocus} style={{ gap: 5 }}>
+            <button className="glass-btn" aria-label="Zen Mode Focus" onClick={toggleFocus} style={{ gap: 5 }}>
               <Maximize2 size={13} /> Focus
             </button>
           )}
           <div className="toolbar-divider" />
-          <button className="theme-toggle" onClick={toggleDark} title="Toggle theme">
+          <button className="theme-toggle" aria-label="Toggle theme" onClick={toggleDark} title="Toggle theme">
             <span className="theme-toggle-thumb" />
           </button>
         </div>
@@ -141,7 +141,7 @@ export default function Editor({
 
         {/* Font */}
         <div style={{ position: 'relative', flexShrink: 0 }}>
-          <button className="glass-btn" onClick={() => { setShowFontDropdown(!showFontDropdown); setShowLangDropdown(false); }} style={{ gap: 4, fontSize: '0.775rem', minWidth: 108 }}>
+          <button className="glass-btn" aria-label="Change font" aria-haspopup="true" aria-expanded={showFontDropdown} onClick={() => { setShowFontDropdown(!showFontDropdown); setShowLangDropdown(false); }} style={{ gap: 4, fontSize: '0.775rem', minWidth: 108 }}>
             <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 80 }}>{fontLabel}</span>
             <ChevronDown size={11} style={{ color: 'var(--text-faint)', flexShrink: 0 }} />
           </button>

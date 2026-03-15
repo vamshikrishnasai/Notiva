@@ -89,14 +89,6 @@ export default function NotivaApp() {
     else document.body.classList.remove('dark-mode');
   }, [isDarkMode]);
 
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setCmdOpen(o => !o); }
-      if (e.key === 'Escape') { setCmdOpen(false); setProfileOpen(false); }
-    };
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
-  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
@@ -177,6 +169,27 @@ export default function NotivaApp() {
       finally { setIsSaving(false); }
     }
   }, [activeView, activeNotebook, fetchItems]);
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); setCmdOpen(o => !o); }
+      if (e.key === 'Escape') { setCmdOpen(false); setProfileOpen(false); }
+      
+      // Power User Shortcuts
+      if (e.altKey) {
+        if (e.key.toLowerCase() === 'n') { e.preventDefault(); handleCreateNew(); }
+        if (e.key.toLowerCase() === 'd') { e.preventDefault(); setIsDarkMode(prev => !prev); }
+        if (e.key.toLowerCase() === 'c') { e.preventDefault(); setChatOpen(prev => !prev); }
+        if (e.key.toLowerCase() === 'f') { 
+          e.preventDefault(); 
+          const searchInput = document.querySelector('.search-input') as HTMLInputElement; 
+          if (searchInput) searchInput.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  }, [handleCreateNew, setIsDarkMode, setChatOpen]);
 
   const selectNote = (item: KnowledgeItem) => {
     setSelectedId(item.id);
@@ -565,13 +578,22 @@ export default function NotivaApp() {
                   <div style={{ padding: '4px 8px' }}>
                     <div className="section-label" style={{ marginTop: 4 }}>Actions</div>
                     {[
-                      { label: 'New Note', action: () => { handleCreateNew(); setCmdOpen(false); } },
-                      { label: 'Open Notiva AI', action: () => { setChatOpen(true); setCmdOpen(false); } },
-                      { label: `Switch to ${isDarkMode ? 'Light' : 'Dark'} Mode`, action: () => { setIsDarkMode(!isDarkMode); setCmdOpen(false); } },
-                      { label: 'My Profile', action: () => { setProfileOpen(true); setCmdOpen(false); } },
+                      { label: 'New Note', shortcut: 'Alt+N', action: () => { handleCreateNew(); setCmdOpen(false); } },
+                      { label: 'Open Notiva AI', shortcut: 'Alt+C', action: () => { setChatOpen(true); setCmdOpen(false); } },
+                      { label: `Switch to ${isDarkMode ? 'Light' : 'Dark'} Mode`, shortcut: 'Alt+D', action: () => { setIsDarkMode(!isDarkMode); setCmdOpen(false); } },
+                      { label: 'Search Notes', shortcut: 'Alt+F', action: () => { 
+                          setCmdOpen(false); 
+                          setTimeout(() => {
+                            const searchInput = document.querySelector('.search-input') as HTMLInputElement; 
+                            if (searchInput) searchInput.focus();
+                          }, 100);
+                        } 
+                      },
+                      { label: 'My Profile', shortcut: '', action: () => { setProfileOpen(true); setCmdOpen(false); } },
                     ].map(cmd => (
-                      <button key={cmd.label} className="dropdown-item" style={{ borderRadius: 'var(--radius-md)', padding: '10px 14px', fontWeight: 500 }} onClick={cmd.action}>
-                        {cmd.label}
+                      <button key={cmd.label} className="dropdown-item" style={{ borderRadius: 'var(--radius-md)', padding: '10px 14px', fontWeight: 500, display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }} onClick={cmd.action}>
+                        <span>{cmd.label}</span>
+                        {cmd.shortcut && <span style={{ fontSize: '0.65rem', color: 'var(--text-muted)', background: 'var(--bg-elevated)', padding: '3px 6px', borderRadius: 4, border: '1px solid var(--border)' }}>{cmd.shortcut}</span>}
                       </button>
                     ))}
                   </div>

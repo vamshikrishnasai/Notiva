@@ -82,7 +82,7 @@ export default function NoteList({
           <div className="notelist-header">
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               {!sidebarOpen && (
-                <button onClick={() => setSidebarOpen(true)} className="glass-btn icon-only">
+                <button aria-label="Open Panels" onClick={() => setSidebarOpen(true)} className="glass-btn icon-only">
                   <Menu size={14} />
                 </button>
               )}
