@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, BookOpen, BrainCircuit, Zap, Shield, Globe, ChevronRight, Star, ArrowRight, Network } from 'lucide-react';
 
@@ -18,7 +19,52 @@ const features = [
   { icon: <Network size={22} />, color: '#ec4899', title: 'Knowledge Graph', desc: 'Interactive topological graphs and line charts that visually map the semantic relationships and connections between your notes.' },
   { icon: <Star size={22} />, color: '#ec4899', title: 'Voice & Read Aloud', desc: 'Dictate notes with voice input or have Notiva read them back to you with multi-language TTS support.' },
 ];
+const taglines = [
+  "Your Second Brain.",
+  "Magnified by AI.",
+  "Organize your knowledge.",
+  "Summarize everything."
+];
 
+function TypewriterText() {
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(80);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const i = loopNum % taglines.length;
+      const fullText = taglines[i];
+
+      setText(isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1));
+      setTypingSpeed(isDeleting ? 40 : 80);
+
+      if (!isDeleting && text === fullText) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && text === '') {
+        setIsDeleting(false);
+        setLoopNum((prev) => prev + 1);
+        setTypingSpeed(500); // pause before starting new typing
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, typingSpeed]);
+
+  return (
+    <span className="gradient-text" style={{ position: 'relative' }}>
+      {text}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ repeat: Infinity, duration: 0.8 }}
+        style={{ fontWeight: 300, color: 'var(--text-primary)', marginLeft: 2 }}
+      >
+        |
+      </motion.span>
+    </span>
+  );
+}
 
 export default function Landing({ onLogin, onSignup, isDark, toggleDark }: LandingProps) {
   return (
@@ -46,9 +92,9 @@ export default function Landing({ onLogin, onSignup, isDark, toggleDark }: Landi
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'var(--accent-muted)', border: '1px solid var(--accent-border)', borderRadius: 'var(--radius-full)', padding: '6px 16px', marginBottom: 28, fontSize: '0.8rem', color: 'var(--accent)', fontWeight: 600 }}>
             <Sparkles size={13} /> AI-Powered Second Brain
           </div>
-          <h1 style={{ fontSize: 'clamp(2.6rem, 5vw, 4rem)', fontWeight: 800, fontFamily: 'var(--font-brand)', letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 24, color: 'var(--text-primary)' }}>
-            Your Notes, Supercharged<br />
-            <span className="gradient-text">with Intelligence</span>
+          <h1 style={{ fontSize: 'clamp(2.6rem, 5vw, 4rem)', fontWeight: 800, fontFamily: 'var(--font-brand)', letterSpacing: '-0.03em', lineHeight: 1.25, marginBottom: 24, color: 'var(--text-primary)', height: 'clamp(5.2rem, 10vw, 8rem)', display: 'block' }}>
+            Notiva:<br />
+            <TypewriterText />
           </h1>
           <p style={{ fontSize: '1.125rem', color: 'var(--text-secondary)', maxWidth: 560, margin: '0 auto 40px', lineHeight: 1.72 }}>
             Notiva combines a beautiful note editor with RAG-powered AI, letting you chat with your knowledge base, translate in 50+ languages, and extract insights from any document.
