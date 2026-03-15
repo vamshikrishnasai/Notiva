@@ -13,6 +13,7 @@ import Sidebar from './components/Sidebar';
 import NoteList from './components/NoteList';
 import Editor from './components/Editor';
 import ChatPanel from './components/ChatPanel';
+import GraphView from './components/GraphView';
 
 import type { KnowledgeItem, ChatMessage, FormData, SortBy, SidebarView, UserData, ItemType } from './components/types';
 
@@ -423,60 +424,75 @@ export default function NotivaApp() {
         userInitial={(user?.name ?? 'G')[0].toUpperCase()}
       />
 
-      {/* Note List */}
-      <NoteList
-        items={filteredItems}
-        loading={loading}
-        selectedId={selectedId}
-        activeView={activeView}
-        sidebarOpen={!!sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-        listOpen={listOpen}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        onSelect={selectNote}
-        onNew={handleCreateNew}
-        onDelete={handleDelete}
-      />
+      {/* Note List / Graph / Editor */}
+      {activeView === 'graph' ? (
+        <GraphView 
+          items={items} 
+          isDark={!!isDarkMode}
+          onNodeClick={(id) => {
+            const item = items.find(i => i.id === id);
+            if (item) {
+              setActiveView('all');
+              selectNote(item);
+            }
+          }}
+        />
+      ) : (
+        <>
+          <NoteList
+            items={filteredItems}
+            loading={loading}
+            selectedId={selectedId}
+            activeView={activeView}
+            sidebarOpen={!!sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
+            listOpen={listOpen}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            onSelect={selectNote}
+            onNew={handleCreateNew}
+            onDelete={handleDelete}
+          />
 
-      {/* Editor */}
-      <Editor
-        formData={formData}
-        setFormData={setFormData}
-        selectedId={selectedId}
-        isSaving={isSaving}
-        savedFlash={savedFlash}
-        aiActionLoading={aiActionLoading}
-        showPreview={showPreview}
-        setShowPreview={setShowPreview}
-        fontSize={fontSize}
-        setFontSize={setFontSize}
-        fontFamily={fontFamily}
-        setFontFamily={setFontFamily}
-        isRecording={isRecording}
-        ttsState={ttsState}
-        sidebarOpen={!!sidebarOpen}
-        listOpen={listOpen}
-        isDarkMode={!!isDarkMode}
-        toggleSidebar={() => { setSidebarOpen(true); setListOpen(true); }}
-        toggleFocus={() => { setSidebarOpen(false); setListOpen(false); }}
-        toggleDark={() => setIsDarkMode(!isDarkMode)}
-        onSave={() => handleSave(false)}
-        onDelete={() => handleDelete()}
-        runAiAction={runAiAction}
-        onTranslate={handleTranslate}
-        onVoice={toggleVoice}
-        onPlayTTS={handlePlayTTS}
-        onPauseTTS={handlePauseTTS}
-        onStopTTS={handleStopTTS}
-        onExport={handleExport}
-        onUrlScrape={handleUrlScrape}
-        isScraping={isScraping}
-        onFileUpload={handleFileUpload}
-        isUploading={isUploading}
-      />
+          <Editor
+            formData={formData}
+            setFormData={setFormData}
+            selectedId={selectedId}
+            isSaving={isSaving}
+            savedFlash={savedFlash}
+            aiActionLoading={aiActionLoading}
+            showPreview={showPreview}
+            setShowPreview={setShowPreview}
+            fontSize={fontSize}
+            setFontSize={setFontSize}
+            fontFamily={fontFamily}
+            setFontFamily={setFontFamily}
+            isRecording={isRecording}
+            ttsState={ttsState}
+            sidebarOpen={!!sidebarOpen}
+            listOpen={listOpen}
+            isDarkMode={!!isDarkMode}
+            toggleSidebar={() => { setSidebarOpen(true); setListOpen(true); }}
+            toggleFocus={() => { setSidebarOpen(false); setListOpen(false); }}
+            toggleDark={() => setIsDarkMode(!isDarkMode)}
+            onSave={() => handleSave(false)}
+            onDelete={() => handleDelete()}
+            runAiAction={runAiAction}
+            onTranslate={handleTranslate}
+            onVoice={toggleVoice}
+            onPlayTTS={handlePlayTTS}
+            onPauseTTS={handlePauseTTS}
+            onStopTTS={handleStopTTS}
+            onExport={handleExport}
+            onUrlScrape={handleUrlScrape}
+            isScraping={isScraping}
+            onFileUpload={handleFileUpload}
+            isUploading={isUploading}
+          />
+        </>
+      )}
 
       {/* Chat Panel */}
       <ChatPanel

@@ -1,7 +1,7 @@
 // Shared types for Notiva components
 export type ItemType = 'note' | 'article' | 'link' | 'research';
 export type SortBy = 'date' | 'title' | 'pinned';
-export type SidebarView = 'all' | 'recent' | 'notes' | 'articles' | 'links' | 'research' | 'starred' | 'archived';
+export type SidebarView = 'all' | 'recent' | 'notes' | 'articles' | 'links' | 'research' | 'starred' | 'archived' | 'graph';
 
 export interface KnowledgeItem {
   id: number;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Menu, Clock, FileText, Book, Link as LinkIcon, GraduationCap,
-  Star, Archive, BookOpen, Plus, ChevronRight, Sparkles, Trash2, User
+  Star, Archive, BookOpen, Plus, ChevronRight, Sparkles, Trash2, User, Network
 } from 'lucide-react';
 import type { KnowledgeItem, SidebarView } from './types';
 
@@ -230,6 +230,10 @@ export default function Sidebar({
             <button className={`nav-item ${activeView === 'all' ? 'active' : ''}`} onClick={() => setActiveView('all')}>
               <span className="nav-item-icon" style={{ color: activeView === 'all' ? 'var(--accent)' : 'var(--text-muted)' }}><BookOpen size={15} /></span>
               <span>All Items</span>
+            </button>
+            <button className={`nav-item ${activeView === 'graph' ? 'active' : ''}`} onClick={() => setActiveView('graph')}>
+              <span className="nav-item-icon" style={{ color: activeView === 'graph' ? '#ec4899' : 'var(--text-muted)' }}><Network size={15} /></span>
+              <span>Knowledge Graph</span>
             </button>
           </div>
 
