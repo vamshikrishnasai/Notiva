@@ -72,7 +72,7 @@ def summarize_note(content: str) -> str:
 
 def answer_question(context: str, question: str) -> str:
     try:
-prompt = f"""You are Notiva AI, an intelligent conversational AI connected to my personal Second Brain knowledge base.
+        prompt = f"""You are Notiva AI, an intelligent conversational AI connected to my personal Second Brain knowledge base.
 You must use the provided <Context> (which contains snippets of my actual notes, extracted via vector search) to answer my question.
 
 Rules to follow:
