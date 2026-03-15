@@ -19,6 +19,36 @@ With Notiva, you can seamlessly organize notes, capture research, attach files, 
 
 ---
 
+## 🏗 Architecture & Design Philosophy
+
+### Portable Architecture
+Notiva is built with clear separation of concerns, allowing for swappable components at each layer:
+- **Frontend Layer:** A decoupled Next.js/React application that interacts strictly via REST APIs, allowing it to be hosted anywhere (Vercel, Netlify, Render).
+- **Backend API Layer:** A stateless FastAPI application that handles business logic and orchestration.
+- **Data Persistence Layer:** Uses SQLAlchemy, enabling seamless switching between SQLite for local edge testing and robust PostgreSQL for production.
+- **Vector Retrieval Layer:** Employs ChromaDB, which can run ephemerally, persistently on disk, or as a standalone Docker service for vector similarity search.
+- **AI Processing Layer:** A modular `gemini_service.py` engine that primarily routes through Google Gemini but supports transparent fallback to Mistral API if rate limits are hit.
+
+### Principles-Based UX
+Our AI interaction patterns are guided by 4 core design principles:
+1. **Context Isolation:** AI answers must be explicitly constrained to the user's specific note contexts to prevent hallucinations and establish absolute trust.
+2. **Frictionless Ingestion:** Knowledge should flow into the system effortlessly—whether through typing, uploading documents, scraping URLs, or voice dictation.
+3. **Progressive Disclosure:** Advanced AI features (like RAG chat or logical flow restructuring) are tucked into secondary panels or toolbars so they don't clutter the primary writing experience.
+4. **Immediate Feedback:** All interactions, from saving a note to extracting keywords, should feel instantaneous with optimistic UI patterns and soft loading states.
+
+### Agent Thinking
+Notiva incorporates automated "agentic" thinking to maintain and improve the system over time:
+- **Auto-Summarization:** Every time a note is saved, a background process evaluates the content and transparently generates a clean summary to optimize future UI rendering.
+- **Self-Healing Vectors:** Hooking into the FastAPI lifespan, the backend automatically scans the SQL database on boot, identifies missing or wiped vectors (common in ephemeral cloud deployments), and resynchronizes ChromaDB in bulk without user intervention.
+- **Dynamic Context Scaling:** The RAG query engine mathematically adjusts its embedding retrieval depth (`n_results`) based on the live size of the user's database to prevent vector mathematically errors on new accounts.
+
+### Infrastructure Mindset
+The entire Notiva engine is designed with an API-first infrastructure mindset:
+- **Extensible Endpoints:** Features like `/query/bullets`, `/query/flow`, and `/query/tags` are exposed as standalone REST endpoints, meaning they can be triggered from anywhere.
+- **Embeddable Capabilities:** Because the backend is entirely decoupled and well-documented (via Swagger UI at `/docs`), the Notiva memory engine and RAG Chat could easily be injected into third-party tools, browser extensions, or embeddable web widgets.
+
+---
+
 ## 💻 Tech Stack
 
 ### Frontend (`/my-app`)
