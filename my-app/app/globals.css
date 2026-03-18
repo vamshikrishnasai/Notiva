@@ -1338,3 +1338,79 @@ body {
   border-color: var(--accent-border);
   background: var(--accent-muted);
 }
+
+/* ════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .app-root {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Sidebar styling for mobile */
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    max-width: 85vw !important;
+    z-index: 1000;
+    box-shadow: var(--shadow-xl);
+  }
+  
+  /* Show the mobile backdrop */
+  .show-on-mobile-flex[style*="display: none"] {
+    display: block !important;
+  }
+  
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .show-on-mobile {
+    display: inline-flex !important;
+  }
+
+  /* NoteList styling for mobile */
+  .notelist-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100% !important;
+    max-width: 100vw !important;
+    z-index: 900;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+  }
+
+  /* ChatPanel styling for mobile */
+  .chat-panel {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100% !important;
+    max-width: 100vw !important;
+    z-index: 1100;
+  }
+
+  /* Editor adjusts on mobile */
+  .editor-area {
+    width: 100%;
+    height: 100%;
+  }
+
+  .editor-body {
+    padding: 24px 16px;
+  }
+
+  .notion-title {
+    font-size: 28px;
+  }
+
+  .editor-topbar {
+    padding: 10px 12px;
+  }
+}

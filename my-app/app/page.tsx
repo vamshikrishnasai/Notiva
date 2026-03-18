@@ -195,6 +195,10 @@ export default function NotivaApp() {
     setSelectedId(item.id);
     setFormData({ title: item.title, content: item.content, type: item.type, tags: item.tags || '', is_pinned: item.is_pinned || false, is_starred: item.is_starred || false, is_archived: item.is_archived || false, notebook: item.notebook || 'My Notebook' });
     setShowPreview(false);
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setSidebarOpen(false);
+      setListOpen(false);
+    }
   };
 
   const handleSave = async (silent = false) => {
@@ -421,6 +425,15 @@ export default function NotivaApp() {
   // Main App
   return (
     <div className="app-root">
+      {/* Mobile Backdrop for Sidebar */}
+      {sidebarOpen && (
+        <div 
+          className="mobile-backdrop show-on-mobile-flex" 
+          style={{ display: 'none', position: 'fixed', inset: 0, zIndex: 950, background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(2px)' }} 
+          onClick={() => setSidebarOpen(false)} 
+        />
+      )}
+
       {/* Sidebar */}
       <Sidebar
         sidebarOpen={!!sidebarOpen}
@@ -466,6 +479,7 @@ export default function NotivaApp() {
             sidebarOpen={!!sidebarOpen}
             setSidebarOpen={setSidebarOpen}
             listOpen={listOpen}
+            setListOpen={setListOpen}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             sortBy={sortBy}

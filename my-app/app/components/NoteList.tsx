@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Plus, FileText, Pin, Star, Archive, Trash2, CheckCircle2, ChevronDown, ChevronUp, Menu, BookOpen } from 'lucide-react';
+import { Search, Plus, FileText, Pin, Star, Archive, Trash2, CheckCircle2, ChevronDown, ChevronUp, Menu, BookOpen, X } from 'lucide-react';
 import { useState } from 'react';
 import type { KnowledgeItem, SortBy, SidebarView } from './types';
 import ReactMarkdown from 'react-markdown';
@@ -14,6 +14,7 @@ interface NoteListProps {
   sidebarOpen: boolean;
   setSidebarOpen: (v: boolean) => void;
   listOpen: boolean;
+  setListOpen?: (v: boolean) => void;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
   sortBy: SortBy;
@@ -59,7 +60,7 @@ function NoteListSkeleton() {
 
 export default function NoteList({
   items, loading, selectedId, activeView, sidebarOpen, setSidebarOpen,
-  listOpen, searchQuery, setSearchQuery, sortBy, setSortBy,
+  listOpen, setListOpen, searchQuery, setSearchQuery, sortBy, setSortBy,
   onSelect, onNew, onDelete,
 }: NoteListProps) {
   const viewLabel =
@@ -82,8 +83,13 @@ export default function NoteList({
           <div className="notelist-header">
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               {!sidebarOpen && (
-                <button aria-label="Open Panels" onClick={() => setSidebarOpen(true)} className="glass-btn icon-only">
+                <button aria-label="Open Panels" onClick={() => setSidebarOpen(true)} className="glass-btn icon-only hide-on-mobile">
                   <Menu size={14} />
+                </button>
+              )}
+              {setListOpen && (
+                <button aria-label="Close List" onClick={() => setListOpen(false)} className="glass-btn icon-only show-on-mobile" style={{ display: 'none' }}>
+                  <X size={14} />
                 </button>
               )}
               <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.01em' }}>
