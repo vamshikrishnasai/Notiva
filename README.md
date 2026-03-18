@@ -64,6 +64,6 @@ npm run dev
 ---
 
 <div align="center">
-  <p>Built with ❤️ by the Notiva Team</p>
+  <p>Built with ❤️ by <b>Vamshi Krishna Sai</b></p>
   <p><i>Empowering productivity through intelligent design.</i></p>
 </div>
