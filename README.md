@@ -1,16 +1,16 @@
 <div align="center">
   <img src="my-app/public/notiva_logo.png" alt="Notiva Logo" width="120" />
-  <h1>Notiva</h1>
+  
   <p><strong>The Intelligent Neural Engine for Your Personal Knowledge Base</strong></p>
 
-  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+  
   [![Stack: Next.js + FastAPI](https://img.shields.io/badge/Stack-Next.js%20%2B%20FastAPI-blueviolet)](https://notiva.app)
   [![AI: Gemini + Mistral](https://img.shields.io/badge/AI-Gemini%20%2B%20Mistral-orange)](https://notiva.app)
 </div>
 
 ---
 
-## 💎 The Vision (Marketing)
+## 💎 The Vision
 
 Notiva isn't just a note-taking app; it's a **second brain**. In an era of information overload, Notiva provides a sanctuary for your thoughts and a powerful engine to retrieve, summarize, and connect them. 
 
